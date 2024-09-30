@@ -6,14 +6,14 @@ from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument('xyz_file', help='XYZ file (input)')
-parser.add_argument('vxl_file', help='VXL file (output)')
+parser.add_argument('output_vxl_file', help='VXL file (output)')
 parser.add_argument('-e', '--enhancement', action='store_true', help='Auto enhancement (default: false)')
 parser.add_argument('-g', '--geo', action='store_true', help='Geo-coordinate system (default: false)')
 parser.add_argument('-r', '--resolution', type=int, default=512, help='Maximum resolution (default: 512)')
 args = parser.parse_args()
 
 xyz_filename = args.xyz_file
-vxl_filename = args.vxl_file
+output_vxl_filename = args.output_vxl_file
 enhancement = args.enhancement
 geo_coordinate_system = args.geo
 resolution = args.resolution
@@ -81,9 +81,9 @@ def main():
 	voxel = create_voxel(xyz_list)
 	if enhancement:
 		enhanced_voxel = enhance_voxel(voxel)
-		np.save(vxl_filename, enhanced_voxel)
+		np.save(output_vxl_filename, enhanced_voxel)
 	else:
-		np.save(xvl_filename, voxel)
+		np.save(output_xvl_filename, voxel)
 
 if __name__ == '__main__':
 	main()
